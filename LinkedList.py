@@ -3,12 +3,15 @@ class Node:
         self.next = None
         self.data = data
     def __repr__(self):
-        return self.data
+        return f"{self.data}"
 
 class LinkedList:
     len = 0
-    def __init__(self):
+    def __init__(self, list_nodes =None):
         self.head = None
+        if list_nodes is not None:
+            for item in list_nodes:
+                self.push(Node(item))
     def get(self,pos):
         if pos > self.len or pos < 0:
             raise Exception('index out of range')
@@ -116,11 +119,6 @@ class LinkedList:
             next = next.next
             self.head.next = n
             n = self.head
-    def sort(self):
-        pass
-    def asort(self):
-        pass
-
     def __repr__(self):
         l = []
         node = self.head
@@ -128,12 +126,7 @@ class LinkedList:
             l.append(node.data)
             node = node.next
         l.append("None")
-        return " -> ".join(l)
-linkedList = LinkedList()
-linkedList.push(Node("0"))
-linkedList.push(Node("1"))
-linkedList.push(Node("2"))
-linkedList.push(Node("3"))
-linkedList.push(Node("4"))
-linkedList.reverse()
+        return " -> ".join(map(str,l))
+
+linkedList = LinkedList([1,2,3,4,5,6])
 print(linkedList)
