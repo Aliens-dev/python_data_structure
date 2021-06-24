@@ -7,7 +7,7 @@ class Node:
 
 class Stack:
     len = 0
-    def __init__(self, my_list = None):
+    def __init__(self):
         self.head = None
     def push(self, node):
         self.len+=1
