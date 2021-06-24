@@ -52,6 +52,8 @@ class LinkedList:
         self.len -= 1
         self.head = self.head.next
     def insert(self, node,pos):
+        if pos > self.len:
+            raise Exception('index out of range')
         if pos == 0:
             self.unshift(node)
             return
@@ -69,17 +71,56 @@ class LinkedList:
         self.len = 0
         return True    
     def remove(self,pos):
-        pass
-    def replace(self,pos):
-        pass
+        if pos > self.len:
+            raise Exception('index out of range')
+        if pos == 0:
+            self.head = self.head.next
+            return
+        n = self.head
+        current = n
+        while pos > 0:
+            pos -= 1
+            current = n
+            n = n.next
+        current.next = n.next
+    def replace(self,pos,node):
+        if pos >= self.len:
+            raise Exception('index out of range')
+        if pos == 0:
+            node.next = self.head.next
+            self.head = node
+            return
+        n = self.head
+        current = n
+        while pos > 0:
+            pos -= 1
+            current = n
+            n = n.next
+        current.next = node
+        node.next = n.next   
+    def toList(self):
+        my_list = []
+        n = self.head
+        while n is not None:
+            my_list.append(n.data)
+            n = n.next
+        return my_list    
     def reverse(self):
-        pass
+        n = self.head
+        if n is None:
+            return n
+        next = n.next
+        n.next = None
+        while next is not None:
+            self.head = next
+            next = next.next
+            self.head.next = n
+            n = self.head
     def sort(self):
         pass
     def asort(self):
         pass
-    def toList(self):
-        pass
+
     def __repr__(self):
         l = []
         node = self.head
@@ -93,5 +134,6 @@ linkedList.push(Node("0"))
 linkedList.push(Node("1"))
 linkedList.push(Node("2"))
 linkedList.push(Node("3"))
-print(linkedList.len)
+linkedList.push(Node("4"))
+linkedList.reverse()
 print(linkedList)
